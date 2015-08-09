@@ -18,8 +18,8 @@
 			<li><%= link_to "Home", root_path%></li>
 			<li><%= link_to "FAQ", faq_path%></li>
 			<% if user_signed_in? %>
-				<li><%= link_to new_pin_path do %>
-					<span class="glyphicon glyphicon-plus"></span> New Pin 
+				<li><%= link_to new_problem_path do %>
+					<span class="glyphicon glyphicon-plus"></span> New Problem 
 					<% end %>
 				</li>
 				<li><%= link_to "My Account", edit_user_registration_path %></li>
