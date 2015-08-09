@@ -1,0 +1,29 @@
+
+<%= render "pages/home" if !user_signed_in? %>
+
+<div id="problems" class="transitions-enabled">
+  <% @solutions.each do |solution| %>
+    <div class="box panel panel-default">
+      <div class="panel-body">
+        <p><strong><%= solution.description %></strong></p>
+        <%= solution.user.name if solution.user %> 
+        <% if current_user && solution.user == current_user%>
+          <div class="actions">
+            <%= link_to edit_solution_path(solution) do %>
+              <span class="glyphicon glyphicon-pencil"></span> Edit
+            <%end%> | 
+            <%= link_to solution, method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <span class="glyphicon glyphicon-trash"></span> Destroy
+            <% end %>
+          </div>
+        <%end%>
+      </div>
+    </div>
+  <% end %>  
+</div>
+
+<%= link_to new_solution_path do %> <span class="glyphicon glyphicon-pencil"></span> New Solution <% end %>
+
+<div class="center">
+<%= will_paginate @solutions, renderer: BootstrapPagination::Rails %>
+</div>
