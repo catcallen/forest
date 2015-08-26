@@ -1,14 +1,26 @@
 <%= link_to 'Back', problems_path %>
 
-<div class="row">
-	<div class="col-md-offset-2 col-md-8">
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<p><strong><%= @problem.description %></strong></p>
-				<%= link_to edit_problem_path(@problem) do %>
-					<span class="glyphicon glyphicon-pencil"></span> Edit
-				<% end %>
-			</div>
-		</div>
-	</div>
+<div class="jumbotron center">
+	<h2><%= @problem.description %></h2>
+</div>
+
+<div id="solutions" class="transitions-enabled">
+  <% @problem.solutions.each do |solution| %>
+    <div class="box panel panel-default">
+      <div class="panel-body">
+        <p><strong><%= solution.description %></strong></p>
+        <%= solution.user.name if solution.user %> 
+        <% if current_user && solution.user == current_user%>
+          <div class="actions">
+            <%= link_to edit_solution_path(solution) do %>
+              <span class="glyphicon glyphicon-pencil"></span> Edit
+            <%end%> | 
+            <%= link_to solution, method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <span class="glyphicon glyphicon-trash"></span> Destroy
+            <% end %>
+          </div>
+        <%end%>
+      </div>
+    </div>
+  <% end %>  
 </div>

@@ -1,7 +1,8 @@
 class ProblemsController < ApplicationController
   before_action :set_problem, only: [:show]
-  before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+
 
   respond_to :html
 

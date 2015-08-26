@@ -1,7 +1,7 @@
 class PinsController < ApplicationController
   before_action :set_pin, only: [:show]
-  before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   respond_to :html
 
@@ -44,7 +44,7 @@ class PinsController < ApplicationController
     end
     
     def correct_user
-      @pin = current_user.pins.find_by(id: params[:id])
+      @pin = current_user.pins.find_by(id: params[:id]) 
       redirect_to pins_path, notice: "That isn't your pin.  No touchy." if @pin.nil?
     end
 

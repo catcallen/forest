@@ -1,0 +1,4 @@
+Notes for Next Time - 
+Trying to get solutions index page to load based on having a problem id when we hit the page. 
+Click on "solutions" link from "problems" page takes us to Solutions page with problem_id in params.  
+However, solutions index page won't load the solutions for that problem (there are none - but still page should load)

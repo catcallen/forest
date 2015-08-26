@@ -1,5 +1,6 @@
 class SolutionsController < ApplicationController
   before_action :set_solution, only: [:show]
+  before_action :must_have_problem, only: [:new]
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
 
@@ -16,6 +17,7 @@ class SolutionsController < ApplicationController
 
   def new
     @solution = current_user.solutions.build
+    @solution.problem_id = params[:problem_id]
     respond_with(@solution)
   end
 
@@ -49,6 +51,12 @@ class SolutionsController < ApplicationController
     end
 
     def solution_params
-      params.require(:solution).permit(:description, :user_id)
+      params.require(:solution).permit(:problem_id, :description, :user_id)
+    end
+
+    def must_have_problem
+      if params[:problem_id].nil?
+        redirect_to problems_path, notice: "Must know problem to view solutions. Pick a problem "
+      end 
     end
 end

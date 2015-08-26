@@ -6,6 +6,13 @@
     <div class="box panel panel-default">
       <div class="panel-body">
         <p><strong><%= solution.description %></strong></p>
+        <p>
+          <% if solution.problem.nil? %>
+            No problem for this solution
+          <% else %>
+            <%=Problem.find(solution.problem_id).description %>
+          <% end %>
+        </p>
         <%= solution.user.name if solution.user %> 
         <% if current_user && solution.user == current_user%>
           <div class="actions">

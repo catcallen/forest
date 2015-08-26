@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150809153236) do
+ActiveRecord::Schema.define(version: 20150811013808) do
 
   create_table "pins", force: true do |t|
     t.string   "description"
@@ -40,8 +40,10 @@ ActiveRecord::Schema.define(version: 20150809153236) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "problem_id"
   end
 
+  add_index "solutions", ["problem_id"], name: "index_solutions_on_problem_id"
   add_index "solutions", ["user_id"], name: "index_solutions_on_user_id"
 
   create_table "users", force: true do |t|
