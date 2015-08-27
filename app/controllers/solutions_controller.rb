@@ -7,8 +7,9 @@ class SolutionsController < ApplicationController
   respond_to :html
 
   def index
-    @solutions = Solution.all.order(created_at: :desc).paginate(:page => params[:page], :per_page => 12)
-    respond_with(@solutions)
+    @solutions = Solution.where(problem_id: params[:problem_id]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 12)
+    @problem = Problem.find(params[:problem_id])
+    respond_with(@solutions, @problem)
   end
 
   def show
@@ -18,6 +19,7 @@ class SolutionsController < ApplicationController
   def new
     @solution = current_user.solutions.build
     @solution.problem_id = params[:problem_id]
+    @problem = Problem.find(params[:problem_id])
     respond_with(@solution)
   end
 
@@ -51,7 +53,7 @@ class SolutionsController < ApplicationController
     end
 
     def solution_params
-      params.require(:solution).permit(:problem_id, :description, :user_id)
+      params.require(:solution).permit(:description, :problem_id)      
     end
 
     def must_have_problem

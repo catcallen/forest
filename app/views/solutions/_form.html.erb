@@ -2,7 +2,6 @@
   <% if @solution.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@solution.errors.count, "error") %> prohibited this solution from being saved:</h2>
-
       <ul>
       <% @solution.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,13 +10,10 @@
     </div>
   <% end %>
 
+  <%= f.hidden_field :problem_id, :value => @solution.problem_id %>
   <div class="form-group field">
-    <%= f.label :description %><br>
+    <%= f.label "New Solution" %><br>
     <%= f.text_field :description, class: "form-control" %>
-  </div>
-  <div class="form-group field">
-    <%= f.label :problem_id %><br>
-    <%= f.text_field :problem_id, class: "form-control" %>
   </div>
   <div class="form-group actions">
     <%= f.submit class: "btn btn-primary"%>

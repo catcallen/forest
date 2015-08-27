@@ -1,18 +1,20 @@
 
 <%= render "pages/home" if !user_signed_in? %>
 
+<%= link_to problems_path do %> <span class="glyphicon glyphicon-home"></span> See All Problems <% end %> <br>
+<%= link_to new_solution_path(:problem_id => @problem.id) do %> <span class="glyphicon glyphicon-pencil"></span> New Solution <% end %>
+
+<div class="jumbotron center">
+  <h2>
+    <%=@problem.description %>
+  </h2>
+</div>
+
 <div id="problems" class="transitions-enabled">
   <% @solutions.each do |solution| %>
     <div class="box panel panel-default">
       <div class="panel-body">
         <p><strong><%= solution.description %></strong></p>
-        <p>
-          <% if solution.problem.nil? %>
-            No problem for this solution
-          <% else %>
-            <%=Problem.find(solution.problem_id).description %>
-          <% end %>
-        </p>
         <%= solution.user.name if solution.user %> 
         <% if current_user && solution.user == current_user%>
           <div class="actions">
@@ -28,8 +30,6 @@
     </div>
   <% end %>  
 </div>
-
-<%= link_to new_solution_path do %> <span class="glyphicon glyphicon-pencil"></span> New Solution <% end %>
 
 <div class="center">
 <%= will_paginate @solutions, renderer: BootstrapPagination::Rails %>

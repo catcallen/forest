@@ -7,7 +7,7 @@
       <div class="panel-body">
         <p><strong><%= problem.description %></strong></p>
         <%= problem.user.name if problem.user %> 
-        <%= link_to "Solutions", solutions_path(:problem_id => problem.id),  :method => :post %>
+        <%= link_to "Solutions", solutions_path(:problem_id => problem.id),  :method => :get %>
         <% if current_user && problem.user == current_user%>
           <div class="actions">
             <%= link_to edit_problem_path(problem) do %>

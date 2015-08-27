@@ -1,4 +1,5 @@
-<%= link_to 'Back', solutions_path %>
+<%= link_to 'See All Solutions', solutions_path(:problem_id => @solution.problem_id),  :method => :get %><br>
+<%= link_to new_solution_path(:problem_id => @solution.problem.id) do %> <span class="glyphicon glyphicon-pencil"></span> New Solution <% end %>
 
 <div class="row">
 	<div class="col-md-offset-2 col-md-8">
